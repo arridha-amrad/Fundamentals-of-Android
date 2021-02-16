@@ -14,13 +14,11 @@ class SecondActivity : AppCompatActivity() {
     val view = viewBinding.root
     setContentView(view);
 
-    viewBinding.btnNext2.setOnClickListener{
-      Intent(this, ThirdActivity::class.java).also {
-        startActivity(it)
-      }
-    }
+    val person = intent.getSerializableExtra("EXTRA_PERSON") as Person
 
-    viewBinding.btnBack2.setOnClickListener{
+    viewBinding.tvDescription.text = "${person.firstName} ${person.lastName} is from ${person.nationality}"
+
+    viewBinding.btnBack.setOnClickListener{
       finish()
     }
   }
