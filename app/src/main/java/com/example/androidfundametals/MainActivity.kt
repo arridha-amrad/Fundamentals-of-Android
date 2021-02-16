@@ -3,29 +3,30 @@ package com.example.androidfundametals
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.RadioButton
-import kotlinx.android.synthetic.main.activity_main.*
+import android.widget.Toast
+import com.example.androidfundametals.databinding.CustomToastBinding
+import com.example.androidfundametals.databinding.ToastActivityBinding
 
 class MainActivity : AppCompatActivity() {
+  private lateinit var toastBinding: ToastActivityBinding
+  private lateinit var cusToastBinding: CustomToastBinding
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_main)
 
-    btnOrder.setOnClickListener {
-      val checkedMeatId = rgMeat.checkedRadioButtonId
-      val meat = findViewById<RadioButton>(checkedMeatId)
+    toastBinding = ToastActivityBinding.inflate(layoutInflater)
+    setContentView(toastBinding.root)
 
-      val cheese = cbCheese.isChecked
-      val salad = cbSalad.isChecked
-      val onions = cbOnions.isChecked
+    cusToastBinding = CustomToastBinding.inflate(layoutInflater)
 
-      tvOrder.text = "You order a burger with : \n" +
-          "${meat.text}" +
-          (if(cheese) "\ncheese" else "") +
-          (if(salad) "\nsalad" else "") +
-          (if(onions) "\nonions" else "");
+    toastBinding.btnToast.setOnClickListener{
+//      Toast.makeText(this, "Hello World", Toast.LENGTH_SHORT).show();
+      Toast(this).apply {
+        duration = Toast.LENGTH_SHORT
+        view = layoutInflater.inflate(R.layout.custom_toast, cusToastBinding.root)
+        show()
+      }
     }
-
   }
 
 }
