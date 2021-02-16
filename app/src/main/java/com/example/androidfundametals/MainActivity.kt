@@ -2,31 +2,29 @@ package com.example.androidfundametals
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.RadioButton
+import android.util.Log
 import android.widget.Toast
-import com.example.androidfundametals.databinding.CustomToastBinding
-import com.example.androidfundametals.databinding.ToastActivityBinding
+import com.example.androidfundametals.databinding.ActivityButtonBinding
 
 class MainActivity : AppCompatActivity() {
-  private lateinit var toastBinding: ToastActivityBinding
-  private lateinit var cusToastBinding: CustomToastBinding
+
+  private lateinit var binding: ActivityButtonBinding;
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    binding = ActivityButtonBinding.inflate(layoutInflater)
+    val view = binding.root;
+    setContentView(view)
 
-    toastBinding = ToastActivityBinding.inflate(layoutInflater)
-    setContentView(toastBinding.root)
+    binding.btnSubmit.setOnClickListener {
+      val firstName = binding.etFirstName.editText?.text.toString()
+      val lastName = binding.etLastName.editText?.text.toString()
+      val nationality = binding.etNationality.editText?.text.toString();
 
-    cusToastBinding = CustomToastBinding.inflate(layoutInflater)
-
-    toastBinding.btnToast.setOnClickListener{
-//      Toast.makeText(this, "Hello World", Toast.LENGTH_SHORT).show();
-      Toast(this).apply {
-        duration = Toast.LENGTH_SHORT
-        view = layoutInflater.inflate(R.layout.custom_toast, cusToastBinding.root)
-        show()
-      }
+      Log.d("MainActivity", "$lastName $firstName comes from $nationality")
     }
+
+
   }
 
 }
