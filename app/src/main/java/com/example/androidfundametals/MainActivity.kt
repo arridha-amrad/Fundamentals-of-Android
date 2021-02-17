@@ -1,9 +1,10 @@
 package com.example.androidfundametals
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import com.example.androidfundametals.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -15,20 +16,22 @@ class MainActivity : AppCompatActivity() {
     binding = ActivityMainBinding.inflate(layoutInflater)
     val view = binding.root;
     setContentView(view)
+  }
 
-    binding.btnSubmit.setOnClickListener {
-      val firstName = binding.etFirstName.editText?.text.toString()
-      val lastName = binding.etLastName.editText?.text.toString()
-      val nationality = binding.etNationality.editText?.text.toString()
-      val person = Person(firstName, lastName, nationality)
-      Log.d("MainActivity", "$firstName $lastName $nationality")
-      Intent(this, SecondActivity::class.java).also {
-        it.putExtra("EXTRA_PERSON", person)
-        startActivity(it)
-      }
+  override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    menuInflater.inflate(R.menu.app_bar_menu, menu)
+    return true
+  }
 
+  override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    when(item.itemId) {
+      R.id.miAddContact -> Toast.makeText(this, "You clicked on Add Contact", Toast.LENGTH_SHORT).show()
+      R.id.miClose -> finish()
+      R.id.miFavorite -> Toast.makeText(this, "You clicked on Favorite", Toast.LENGTH_SHORT).show()
+      R.id.miFeedback -> Toast.makeText(this, "You clicked on Feedback", Toast.LENGTH_SHORT).show()
+      R.id.miSettings -> Toast.makeText(this, "You clicked on Settings", Toast.LENGTH_SHORT).show()
     }
-
+    return true
   }
 
 }
