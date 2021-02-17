@@ -17,5 +17,4 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class SecondFragment : Fragment(R.layout.fragment_second) {
-
 }
