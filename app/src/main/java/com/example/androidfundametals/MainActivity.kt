@@ -1,35 +1,51 @@
 package com.example.androidfundametals
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
-import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidfundametals.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
   private lateinit var binding: ActivityMainBinding;
 
+  @RequiresApi(Build.VERSION_CODES.M)
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     binding = ActivityMainBinding.inflate(layoutInflater)
     val view = binding.root;
     setContentView(view)
 
-    // if the array<String> is known at run time not from xml
-    val items = listOf<String>("choose", "First item", "Second item", "Third item", "Fourth item")
-    val adapter = ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, items)
-    binding.spMonths.adapter = adapter;
+    val todoList = mutableListOf<Todo>(
+      Todo("eat with egg", false),
+      Todo("go shopping", true),
+      Todo("debugging e-commerce android", false),
+      Todo("meeting with mr.James", false)
+    )
 
-    binding.spMonths.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-      override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        if (parent?.getItemAtPosition(position).toString().trim() != "choose"){
-          Toast.makeText(this@MainActivity, "You selected : ${parent?.getItemAtPosition(position).toString()}", Toast.LENGTH_LONG).show()
-        }
+    val adapter = TodoAdapter(todoList)
+    binding.rvTodo.adapter = adapter
+    binding.rvTodo.layoutManager = LinearLayoutManager(this)
+
+    binding.apply {
+      btnAdd.setOnClickListener {
+        val title = etTodo.text.toString()
+        val newTodo = Todo(title, false)
+        todoList.add(0, newTodo)
+        adapter.notifyItemInserted(0)
+        etTodo.text = null
+        Toast.makeText(this@MainActivity, "New todo added", Toast.LENGTH_LONG).show()
+
+        // dismiss the keyboard
+        val imm: InputMethodManager =
+          getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(etTodo.getWindowToken(), 0)
       }
-      override fun onNothingSelected(parent: AdapterView<*>?) {}
     }
 
   }
