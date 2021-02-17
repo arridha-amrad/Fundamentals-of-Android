@@ -7,69 +7,44 @@
     android:padding="10dp"
     tools:context=".MainActivity">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/etFirstName"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:hint="FirstName"
-        app:layout_constraintEnd_toStartOf="@+id/etLastName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/etLastName"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:hint="Last Name"
-        app:layout_constraintBottom_toBottomOf="@+id/etFirstName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/etFirstName"
-        app:layout_constraintTop_toTopOf="@+id/etFirstName">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/etNationality"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:hint="Nationality"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etFirstName">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnSubmit"
+        android:id="@+id/btnDialog1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Submit"
-        android:textColor="@android:color/white"
+        android:elevation="0dp"
         app:cornerRadius="0dp"
-        app:elevation="0dp"
+        android:padding="5dp"
+        android:text="Dialog 1"
+        android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.375"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etNationality" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnDialog2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:elevation="0dp"
+        app:cornerRadius="0dp"
+        android:padding="5dp"
+        android:text="Dialog 2"
+        android:textColor="@android:color/white"
+        app:layout_constraintStart_toStartOf="@+id/btnDialog1"
+        app:layout_constraintTop_toBottomOf="@+id/btnDialog1" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnDialog3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:elevation="0dp"
+        app:cornerRadius="0dp"
+        android:padding="5dp"
+        android:text="Dialog 3"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="@+id/btnDialog2"
+        app:layout_constraintStart_toStartOf="@+id/btnDialog2"
+        app:layout_constraintTop_toBottomOf="@+id/btnDialog2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
