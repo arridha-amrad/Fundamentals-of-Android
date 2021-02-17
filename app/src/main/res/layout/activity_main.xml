@@ -7,44 +7,16 @@
     android:padding="10dp"
     tools:context=".MainActivity">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnDialog1"
+    <Spinner
+        style="@style/Widget.AppCompat.DropDownItem.Spinner"
+        android:id="@+id/spMonths"
+        android:entries="@array/months"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:elevation="0dp"
-        app:cornerRadius="0dp"
-        android:padding="5dp"
-        android:text="Dialog 1"
-        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnDialog2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:elevation="0dp"
-        app:cornerRadius="0dp"
-        android:padding="5dp"
-        android:text="Dialog 2"
-        android:textColor="@android:color/white"
-        app:layout_constraintStart_toStartOf="@+id/btnDialog1"
-        app:layout_constraintTop_toBottomOf="@+id/btnDialog1" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnDialog3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:elevation="0dp"
-        app:cornerRadius="0dp"
-        android:padding="5dp"
-        android:text="Dialog 3"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="@+id/btnDialog2"
-        app:layout_constraintStart_toStartOf="@+id/btnDialog2"
-        app:layout_constraintTop_toBottomOf="@+id/btnDialog2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
