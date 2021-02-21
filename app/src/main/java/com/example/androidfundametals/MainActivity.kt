@@ -1,16 +1,15 @@
 package com.example.androidfundametals
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.viewpager2.widget.ViewPager2
 import com.example.androidfundametals.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
   private lateinit var binding: ActivityMainBinding;
-  private val firstFragment = FirstFragment()
-  private val secondFragment = SecondFragment()
-  private val thirdFragment = ThirdFragment()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -18,28 +17,24 @@ class MainActivity : AppCompatActivity() {
     val view = binding.root;
     setContentView(view)
 
-    setFragment(firstFragment)
+    val images = listOf<Int>(
+        R.drawable.img1,
+        R.drawable.img2,
+        R.drawable.img3,
+        R.drawable.img4,
+        R.drawable.img5,
+        R.drawable.img6,
+    )
+    val vpAdapter = ViewPagerAdapter(images)
+    binding.viewPager.apply {
+      adapter = vpAdapter
+      orientation = ViewPager2.ORIENTATION_VERTICAL
 
-    binding.bottomNavigationView2.setOnNavigationItemSelectedListener {
-      when(it.itemId){
-        R.id.miHome -> setFragment(firstFragment)
-        R.id.miMessages -> setFragment(secondFragment)
-        R.id.miProfile -> setFragment(thirdFragment)
-      }
-      true
-    }
-    binding.bottomNavigationView2.getOrCreateBadge(R.id.miMessages).apply {
-      number = 10;
-      isVisible = true
+      beginFakeDrag()
+      fakeDragBy(-10f)
+      endFakeDrag()
     }
 
-  }
-
-  private fun setFragment(fragment: Fragment){
-    supportFragmentManager.beginTransaction().apply {
-      replace(R.id.flFragment, fragment)
-      commit()
-    }
   }
 
 }
