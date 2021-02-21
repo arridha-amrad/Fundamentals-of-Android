@@ -17,29 +17,35 @@ class MainActivity : AppCompatActivity() {
       val view = binding.root;
       setContentView(view)
 
-      toggle = ActionBarDrawerToggle(this, binding.drawerLayout, R.string.open, R.string.close)
-      binding.drawerLayout.addDrawerListener(toggle)
-      toggle.syncState()
+      val sharedPreferences = getSharedPreferences("myPref", MODE_PRIVATE)
+      val editor = sharedPreferences.edit()
 
-      supportActionBar?.setDisplayHomeAsUpEnabled(true)
+      binding.apply {
 
-      binding.navView.setNavigationItemSelectedListener {
-         when(it.itemId) {
-            R.id.miItem1 -> Toast.makeText(this, "Item one selected", Toast.LENGTH_SHORT).show()
-            R.id.miItem2 -> Toast.makeText(this, "Item two selected", Toast.LENGTH_SHORT).show()
-            R.id.miItem3 -> Toast.makeText(this, "Item three selected", Toast.LENGTH_SHORT).show()
+         btnSave.setOnClickListener {
+            val name = etName.text.toString()
+            val age = etAge.text.toString().toInt()
+            val isAdult = cbAdult.isChecked
+
+            editor.apply {
+               putString("name", name)
+               putInt("age", age)
+               putBoolean("isAdult", isAdult)
+               apply()
+            }
          }
-         true
-      }
 
-   }
+         btnLoad.setOnClickListener {
+            val name = sharedPreferences.getString("name", null)
+            val age = sharedPreferences.getInt("age", 0)
+            val isAdult = sharedPreferences.getBoolean("isAdult", false)
 
-   override fun onOptionsItemSelected(item: MenuItem): Boolean {
-      // when working with drawer we need to setup this
-      if(toggle.onOptionsItemSelected(item)){
-         return true
+            etName.setText(name)
+            etAge.setText(age.toString())
+            cbAdult.isChecked = isAdult
+         }
+
       }
-      return super.onOptionsItemSelected(item)
    }
 
 }
