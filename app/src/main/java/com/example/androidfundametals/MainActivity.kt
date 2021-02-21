@@ -1,56 +1,45 @@
 package com.example.androidfundametals
 
 import android.os.Bundle
-import android.view.View
+import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.viewpager2.widget.ViewPager2
 import com.example.androidfundametals.databinding.ActivityMainBinding
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding;
+   private lateinit var binding: ActivityMainBinding;
+   private lateinit var toggle: ActionBarDrawerToggle
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root;
-        setContentView(view)
+   override fun onCreate(savedInstanceState: Bundle?) {
+      super.onCreate(savedInstanceState)
+      binding = ActivityMainBinding.inflate(layoutInflater)
+      val view = binding.root;
+      setContentView(view)
 
-        val images = listOf(
-                R.drawable.img1,
-                R.drawable.img2,
-                R.drawable.img3,
-                R.drawable.img4,
-                R.drawable.img5,
-                R.drawable.img6,
-        )
+      toggle = ActionBarDrawerToggle(this, binding.drawerLayout, R.string.open, R.string.close)
+      binding.drawerLayout.addDrawerListener(toggle)
+      toggle.syncState()
 
-        val vpAdapter = ViewPagerAdapter(images)
-        binding.viewPager.apply {
-            adapter = vpAdapter
-        }
+      supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
-            tab.text = "Tab ${position + 1}" }.attach()
+      binding.navView.setNavigationItemSelectedListener {
+         when(it.itemId) {
+            R.id.miItem1 -> Toast.makeText(this, "Item one selected", Toast.LENGTH_SHORT).show()
+            R.id.miItem2 -> Toast.makeText(this, "Item two selected", Toast.LENGTH_SHORT).show()
+            R.id.miItem3 -> Toast.makeText(this, "Item three selected", Toast.LENGTH_SHORT).show()
+         }
+         true
+      }
 
-        binding.tabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                Toast.makeText(this@MainActivity, "Selected tab ${tab?.text}", Toast.LENGTH_SHORT).show()
-            }
+   }
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-                Toast.makeText(this@MainActivity, "UnSelected tab ${tab?.text}", Toast.LENGTH_SHORT).show()
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-                Toast.makeText(this@MainActivity, "Reselected tab ${tab?.text}", Toast.LENGTH_SHORT).show()
-            }
-
-        })
-
-    }
+   override fun onOptionsItemSelected(item: MenuItem): Boolean {
+      // when working with drawer we need to setup this
+      if(toggle.onOptionsItemSelected(item)){
+         return true
+      }
+      return super.onOptionsItemSelected(item)
+   }
 
 }

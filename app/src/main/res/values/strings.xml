@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">View Pager</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="app_name">Slidable Menu With Navigation Drawer</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>
